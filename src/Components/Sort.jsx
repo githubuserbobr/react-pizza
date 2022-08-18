@@ -1,7 +1,7 @@
 import React from "react";
 const Sort = () => {
     const [isVisible, setIsVisible] = React.useState(false)
-    const [activeList, setActiveList] = React.useState()
+    const [activeList, setActiveList] = React.useState(0)
     const list = ["Цене", "Популярности", "Алфавиту"]
     function onClickListItem(i) {
         setActiveList(i)

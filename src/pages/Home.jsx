@@ -15,8 +15,10 @@ import SkeletonLoader from '../helpers/loader/SkeletonLoader';
             })
             .then(arr => setItems(arr),
                 setIsLoading(false))
+                window.scrollTo(0,0)
     }, [])
     return (
+        <div className="content">
         <div className="container">
             <div className="content__top">
                 <Categories />
@@ -33,6 +35,7 @@ import SkeletonLoader from '../helpers/loader/SkeletonLoader';
                 }
             </div>
         </div>
+    </div>
     )
 }
 export default Home

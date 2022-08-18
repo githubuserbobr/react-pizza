@@ -13,14 +13,12 @@ function App() {
   return (
     <div className="wrapper">
       <Header />
-      <div className="content">
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="*" element={<NotFound />}/>
           <Route path="/Cart" element={<Cart />}/>
         </Routes>
       </div>
-    </div>
   );
 }
 

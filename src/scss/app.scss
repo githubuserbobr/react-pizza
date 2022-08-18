@@ -24,15 +24,19 @@ body {
   }
 
   &__items {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   }
 
   &__top {
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
     justify-content: space-between;
+
+    .categories {
+      display: flex;      
+    }
   }
 }
 
@@ -67,6 +71,7 @@ body {
       width: 30px;
       height: 30px;
       margin-right: 10px;
+
       path {
         stroke: $black;
         stroke-width: 1.9;
@@ -99,6 +104,7 @@ body {
           stroke: darken($color: #b6b6b6, $amount: 50);
         }
       }
+
       span {
         color: darken($color: #b6b6b6, $amount: 50);
       }
@@ -199,6 +205,7 @@ body {
           height: 11.5px;
           position: relative;
         }
+
         &:hover,
         &:active {
           border-color: darken($color: $gray-line, $amount: 80);
@@ -256,6 +263,7 @@ body {
 
         svg {
           margin-right: 12px;
+
           path {
             fill: transparent;
             stroke-width: 2;

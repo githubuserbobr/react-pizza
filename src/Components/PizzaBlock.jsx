@@ -10,8 +10,6 @@ export const PizzaBlock = ({
   types,
   id,
 }) => {
-  console.log(category);
-  console.log(rating);
   const typeNames = ["традиционное", "тонкое"];
   const [activeType, setActiveType] = React.useState(0);
   const [activeSize, setActiveSize] = React.useState();
@@ -34,6 +32,7 @@ export const PizzaBlock = ({
           </ul>
           <ul>
             {sizes.map((size, index) => (
+              <>
               <li
                 key={size}
                 onClick={() => setActiveSize(index)}
@@ -41,6 +40,7 @@ export const PizzaBlock = ({
               >
                 {size}см
               </li>
+              </>
             ))}
           </ul>
         </div>

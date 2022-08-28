@@ -1,8 +1,16 @@
 import React from "react";
-const Sort = ({ activeSortItem, setSortType, sortList }) => {
+const Sort = ({ setSortType }) => {
+
   const [isVisible, setIsVisible] = React.useState(false);
-  function onClickSort(i) {
-    setSortType(i);
+  const [activeSortItem, setActiveSortItem] = React.useState(0);
+  const sortList = [
+    { name: "цене", sortProperty: "price" },
+    { name: "популярности", sortProperty: "rating" },
+    { name: "алфавиту", sortProperty: "title" },
+  ];
+  function onClickSort(i,property) {
+    setSortType(property)
+    setActiveSortItem(i);
     setIsVisible(!isVisible);
   }
   return (
@@ -31,7 +39,7 @@ const Sort = ({ activeSortItem, setSortType, sortList }) => {
             {sortList.map((obj, i) => (
               <li
                 key={i}
-                onClick={() => onClickSort(i)}
+                onClick={() => onClickSort(i,sortList[activeSortItem].sortProperty)}
                 className={
                   obj.name === sortList[activeSortItem].name ? "active" : null
                 }

@@ -9,19 +9,20 @@ const Home = () => {
   const [items, setItems] = React.useState([]);
   const [isLoading, setIsLoading] = React.useState(true);
   const [activeCategory, setActiveCategory] = React.useState(0);
-  const [sortParams, setSortParams] = React.useState()
-  console.log(sortParams)
+  const [sortParams, setSortParams] = React.useState('')
+  const [sortMethod, setSortMethod] = React.useState('asc')
+  console.log(sortMethod)
   React.useEffect(() => {
     setIsLoading(true)
     fetch(
-      `https://6308ac9b46372013f5839ebc.mockapi.io/pizza-items?${activeCategory > 0 ? `category=${activeCategory}` : ''}${sortParams === '' ? '' : `sortBy=${sortParams}&order=desc`}`
+      `https://6308ac9b46372013f5839ebc.mockapi.io/pizza-items?${activeCategory > 0 ? `category=${activeCategory}` : ''}${sortParams === '' ? '' : `&sortBy=${sortParams}&order=${sortMethod}`}`
     )
       .then((res) => {
         return res.json();
       })
       .then((arr) => setItems(arr), setIsLoading(false));
     window.scrollTo(0, 0);
-  }, [activeCategory,sortParams]);
+  }, [activeCategory,sortParams,sortMethod]);
   return (
     <div className="content">
       <div className="container">
@@ -32,6 +33,8 @@ const Home = () => {
           />
           <Sort
             setSortType={(property) => setSortParams(property)}
+            sortMethod={sortMethod}
+            setSortMethod={setSortMethod}
           />
         </div>
         <h2 className="content__title">Все пиццы</h2>

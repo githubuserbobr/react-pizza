@@ -1,18 +1,34 @@
 import React from "react";
-const Sort = ({ setSortType }) => {
-
+const Sort = ({ setSortType, setSortMethod }) => {
   const [isVisible, setIsVisible] = React.useState(false);
   const [activeSortItem, setActiveSortItem] = React.useState(0);
   const sortList = [
-    { name: "цене", sortProperty: "price" },
-    { name: "популярности", sortProperty: "rating" },
-    { name: "алфавиту", sortProperty: "title" },
+    { name: "цене(по возрастанию)", sortProperty: "price" },
+    { name: "цене(по убыванию)", sortProperty: "price", method: "desc" },
+    { name: "популярности(по возрастанию)", sortProperty: "rating" },
+    {
+      name: "популярности(по убыванию)",
+      sortProperty: "rating",
+      method: "desc",
+    },
+    { name: "алфавиту(по возрастанию)", sortProperty: "title" },
+    { name: "алфавиту(по убыванию)", sortProperty: "title", method: "desc" },
   ];
-  function onClickSort(i,property) {
-    setSortType(property)
-    setActiveSortItem(i);
+
+  function onClickSort(i, obj) {
+    debugger;
+    if (obj.hasOwnProperty("method")) {
+      setActiveSortItem(i);
+      setSortType(obj.sortProperty);
+      setSortMethod("desc");
+    } else {
+      setActiveSortItem(i);
+      setSortType(obj.sortProperty);
+      setSortMethod("asc");
+    }
     setIsVisible(!isVisible);
   }
+
   return (
     <div className="sort">
       <div className="sort__label">
@@ -39,7 +55,7 @@ const Sort = ({ setSortType }) => {
             {sortList.map((obj, i) => (
               <li
                 key={i}
-                onClick={() => onClickSort(i,sortList[activeSortItem].sortProperty)}
+                onClick={() => onClickSort(i, sortList[i])}
                 className={
                   obj.name === sortList[activeSortItem].name ? "active" : null
                 }

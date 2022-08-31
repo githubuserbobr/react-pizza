@@ -5,24 +5,32 @@ import Sort from "../Components/Sort";
 import PizzaBlock from "../Components/PizzaBlock";
 import SkeletonLoader from "../helpers/loader/SkeletonLoader";
 import context from "../API/Context/Context";
-const Home = () => {
-  const [items, setItems] = React.useState([]);
-  const [isLoading, setIsLoading] = React.useState(true);
-  const [activeCategory, setActiveCategory] = React.useState(0);
+const Home = ({ currentPage }) => {
+  const [items, setItems] = React.useState([])
+  const [isLoading, setIsLoading] = React.useState(true)
+  const [activeCategory, setActiveCategory] = React.useState(0)
   const [sortParams, setSortParams] = React.useState('')
   const [sortMethod, setSortMethod] = React.useState('asc')
-  console.log(sortMethod)
+  const [totalCount, setTotalCount] = React.useContext(context)
+  // const [currentPage, setCurrentPage] = React.useContext(context)
+
   React.useEffect(() => {
-    setIsLoading(true)
+    setIsLoading(true) 
     fetch(
-      `https://6308ac9b46372013f5839ebc.mockapi.io/pizza-items?${activeCategory > 0 ? `category=${activeCategory}` : ''}${sortParams === '' ? '' : `&sortBy=${sortParams}&order=${sortMethod}`}`
+      `https://6308ac9b46372013f5839ebc.mockapi.io/pizza-items?page=${currentPage}&limit=1${activeCategory > 0 ? `category=${activeCategory}` : ''}${sortParams === '' ? '' : `&sortBy=${sortParams}&order=${sortMethod}`}`
     )
       .then((res) => {
         return res.json();
       })
-      .then((arr) => setItems(arr), setIsLoading(false));
+      .then((arr) => {
+        return (
+          setItems(arr),
+          setTotalCount(arr.length)
+          )
+      })
+      setIsLoading(false)
     window.scrollTo(0, 0);
-  }, [activeCategory,sortParams,sortMethod]);
+  }, [activeCategory,sortParams,sortMethod,currentPage]);
   return (
     <div className="content">
       <div className="container">

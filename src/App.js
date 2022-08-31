@@ -10,10 +10,10 @@ import Pagination from "./Components/Pagination/Pagination";
 
 function App() {
   const [currentPage, setCurrentPage] = React.useState(1);
-  const [totalCount, setTotalCount] = React.useState(null)
+  // const [totalCount, setTotalCount] = React.useState(null)
   // console.log(currentPage)
   return (
-    <context.Provider value={[totalCount,setTotalCount]}>
+    <context.Provider value={[currentPage, setCurrentPage]}>
       <div className="wrapper">
         <Header />
         <Routes>
@@ -23,10 +23,7 @@ function App() {
         </Routes>
         <Pagination 
         currentPage={currentPage}
-        className="pagination-bar"
-        pageSize={4}
-        totalCount={totalCount}
-        onPageChange={page => setCurrentPage(page)}
+        setCurrentPage={setCurrentPage}
         />
       </div>
     </context.Provider>

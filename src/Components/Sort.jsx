@@ -16,7 +16,6 @@ const Sort = ({ setSortType, setSortMethod }) => {
   ];
 
   function onClickSort(i, obj) {
-    debugger;
     if (obj.hasOwnProperty("method")) {
       setActiveSortItem(i);
       setSortType(obj.sortProperty);

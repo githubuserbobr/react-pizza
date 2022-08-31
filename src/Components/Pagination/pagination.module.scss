@@ -1,0 +1,12 @@
+.wrapper {
+    padding: 15px;
+    font-size: 35px;
+    letter-spacing: 15px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    
+    .list_item {
+        display: inline-block;
+    }
+}

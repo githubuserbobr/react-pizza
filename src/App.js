@@ -10,21 +10,29 @@ import Pagination from "./Components/Pagination/Pagination";
 
 function App() {
   const [currentPage, setCurrentPage] = React.useState(1);
-  // const [totalCount, setTotalCount] = React.useState(null)
-  // console.log(currentPage)
+  const [items, setItems] = React.useState([]);
+  const [searchValue, setSearchValue] = React.useState("");
   return (
     <context.Provider value={[currentPage, setCurrentPage]}>
       <div className="wrapper">
-        <Header />
+        <Header
+          searchValue={searchValue}
+          setSearchValue={setSearchValue}
+        />
         <Routes>
-          <Route path="/" element={<Home currentPage={currentPage} />} />
+          <Route
+            path="/"
+            element={<Home 
+            items={items} 
+            setItems={setItems}
+            searchValue={searchValue}
+            setSearchValue={setSearchValue}
+            />}
+          />
           <Route path="*" element={<NotFound />} />
           <Route path="/Cart" element={<Cart />} />
         </Routes>
-        <Pagination 
-        currentPage={currentPage}
-        setCurrentPage={setCurrentPage}
-        />
+        <Pagination currentPage={currentPage} setCurrentPage={setCurrentPage} />
       </div>
     </context.Provider>
   );

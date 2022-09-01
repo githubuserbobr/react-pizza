@@ -13,7 +13,7 @@ const Home = ({ items, setItems, setSearchValue, searchValue }) => {
   const [currentPage, setCurrentPage] = React.useContext(context);
 
   React.useEffect(() => {
-    const pagination = `page=${currentPage}&limit=4`;
+    const pagination = `&page=${currentPage}&limit=4`;
     setIsLoading(true);
     fetch(
       `https://6308ac9b46372013f5839ebc.mockapi.io/pizza-items?${
@@ -21,6 +21,9 @@ const Home = ({ items, setItems, setSearchValue, searchValue }) => {
       }
       ${activeCategory > 0 ? `category=${activeCategory}` : ""}${
         sortParams === "" ? "" : `&sortBy=${sortParams}&order=${sortMethod}`
+      }
+      ${
+        pagination
       }`
     )
       .then((res) => {

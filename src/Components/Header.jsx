@@ -13,9 +13,9 @@ export const Header = ({ searchValue, setSearchValue }) => {
               <h1>React Pizza V2</h1>
               <p>самая вкусная пицца во вселенной</p>
             </div>
-            <Search searchValue={searchValue} setSearchValue={setSearchValue} />
           </div>
         </Link>
+        <Search searchValue={searchValue} setSearchValue={setSearchValue} />
         <div className="header__cart">
           <Link to="/Cart" className="button button--cart">
             <span>520 ₽</span>

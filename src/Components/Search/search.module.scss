@@ -1,6 +1,38 @@
-.input {
-    height: 32px;
-    width: 400px;
-    padding: 10px;
-    margin-left: 15px;
+.search_wrapper {
+    position: relative;
+    cursor: pointer;
+    .input {
+        height: 32px;
+        width: 400px;
+        padding: 18px 35px;
+        border-radius: 8px;
+        border: 1px solid rgba(0, 0, 0, 0.1);
+        font-size: 18px;
+        // transition: all 0.18s ease-in-out;
+        // &:focus {
+        //     width: 500px;
+        // }
+    }
+
+    .delete_icon {
+        position: absolute;
+        width: 20px;
+        height: 20px;
+        right: 15px;
+        top: 9px;
+        opacity: 0.5;
+        
+        &:hover {
+            opacity: 0.8;
+        }
+    }
+    
+    .search_icon {
+        position: absolute;
+        width: 20px;
+        height: 20px;
+        top: 9px;
+        left: 3px;
+        opacity: 0.3;
+    }
 }

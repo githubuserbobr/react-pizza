@@ -4,7 +4,6 @@ import { ReactComponent as SearchIcon } from "../../assets/img/search_icon.svg";
 import { ReactComponent as DeleteIcon } from "../../assets/img/delete_icon.svg";
 
 const Search = ({ searchValue, setSearchValue }) => {
-  console.log(searchValue);
   return (
     <div className={s.search_wrapper}>
       {searchValue && (

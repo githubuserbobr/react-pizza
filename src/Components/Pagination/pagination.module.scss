@@ -6,10 +6,10 @@
     display: flex;
     justify-content: center;
     
-    .list_item, .active {
+    .list_item {
         display: inline-block;
     }
-    // .active {
-    //     font-weight: 800;
-    // }
+    .active {
+        font-weight: 800;
+    }
 }

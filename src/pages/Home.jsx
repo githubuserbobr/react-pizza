@@ -5,26 +5,27 @@ import Sort from "../Components/Sort";
 import PizzaBlock from "../Components/PizzaBlock";
 import SkeletonLoader from "../helpers/loader/SkeletonLoader";
 import context from "../API/Context/Context";
-const Home = ({ items, setItems, setSearchValue, searchValue }) => {
+const Home = ({ searchValue }) => {
   const [isLoading, setIsLoading] = React.useState(true);
   const [activeCategory, setActiveCategory] = React.useState(0);
   const [sortParams, setSortParams] = React.useState("");
   const [sortMethod, setSortMethod] = React.useState("asc");
   const [currentPage, setCurrentPage] = React.useContext(context);
-
+  const [items, setItems] = React.useState([]);
   React.useEffect(() => {
     const pagination = `&page=${currentPage}&limit=4`;
     setIsLoading(true);
     fetch(
       `https://6308ac9b46372013f5839ebc.mockapi.io/pizza-items?${
-        searchValue === "" ? "" : `search=${searchValue}`
+        searchValue === "" ? "" : `title=${searchValue}`
       }
       ${activeCategory > 0 ? `category=${activeCategory}` : ""}${
         sortParams === "" ? "" : `&sortBy=${sortParams}&order=${sortMethod}`
       }
       ${
         pagination
-      }`
+      }
+      `
     )
       .then((res) => {
         return res.json();

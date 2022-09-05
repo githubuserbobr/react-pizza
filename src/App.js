@@ -7,10 +7,9 @@ import { Routes, Route } from "react-router-dom";
 import Cart from "./pages/Cart";
 import context from "./API/Context/Context";
 import Pagination from "./Components/Pagination/Pagination";
-
+import { useSelector, useDispatch } from 'react-redux'
 function App() {
   const [currentPage, setCurrentPage] = React.useState(1);
-  const [items, setItems] = React.useState([]);
   const [searchValue, setSearchValue] = React.useState("");
   return (
     <context.Provider value={[currentPage, setCurrentPage]}>
@@ -23,8 +22,6 @@ function App() {
           <Route
             path="/"
             element={<Home 
-            items={items} 
-            setItems={setItems}
             searchValue={searchValue}
             setSearchValue={setSearchValue}
             />}
@@ -32,7 +29,9 @@ function App() {
           <Route path="*" element={<NotFound />} />
           <Route path="/Cart" element={<Cart />} />
         </Routes>
-        <Pagination currentPage={currentPage} setCurrentPage={setCurrentPage} />
+        <Pagination 
+        currentPage={currentPage} 
+        setCurrentPage={setCurrentPage} />
       </div>
     </context.Provider>
   );

@@ -1,32 +1,12 @@
 import React from "react";
+import { useSelector, useDispatch } from 'react-redux'
+import { setCategoryId } from "../redux/slices/sortSlice";
+
 const Sort = ({ setSortType, setSortMethod }) => {
   const [isVisible, setIsVisible] = React.useState(false);
-  const [activeSortItem, setActiveSortItem] = React.useState(0);
-  const sortList = [
-    { name: "цене(по возрастанию)", sortProperty: "price" },
-    { name: "цене(по убыванию)", sortProperty: "price", method: "desc" },
-    { name: "популярности(по возрастанию)", sortProperty: "rating" },
-    {
-      name: "популярности(по убыванию)",
-      sortProperty: "rating",
-      method: "desc",
-    },
-    { name: "алфавиту(по возрастанию)", sortProperty: "title" },
-    { name: "алфавиту(по убыванию)", sortProperty: "title", method: "desc" },
-  ];
-
-  function onClickSort(i, obj) {
-    if (obj.hasOwnProperty("method")) {
-      setActiveSortItem(i);
-      setSortType(obj.sortProperty);
-      setSortMethod("desc");
-    } else {
-      setActiveSortItem(i);
-      setSortType(obj.sortProperty);
-      setSortMethod("asc");
-    }
-    setIsVisible(!isVisible);
-  }
+  const sortList = useSelector(state => state.sortReducer.sortList)
+  const categoryId = useSelector(state => state.sortReducer.categoryId)
+  const dispatch = useDispatch();
 
   return (
     <div className="sort">
@@ -45,7 +25,7 @@ const Sort = ({ setSortType, setSortMethod }) => {
         </svg>
         <b>Сортировка по:</b>
         <span onClick={() => setIsVisible(!isVisible)}>
-          {sortList[activeSortItem].name}
+          {sortList[categoryId].name}
         </span>
       </div>
       {isVisible && (
@@ -54,9 +34,9 @@ const Sort = ({ setSortType, setSortMethod }) => {
             {sortList.map((obj, i) => (
               <li
                 key={i}
-                onClick={() => onClickSort(i, sortList[i])}
+                onClick={() => dispatch(setCategoryId(i))}
                 className={
-                  obj.name === sortList[activeSortItem].name ? "active" : null
+                  obj.name === sortList[categoryId].name ? "active" : null
                 }
               >
                 {obj.name}

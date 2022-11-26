@@ -5,11 +5,16 @@ import Sort from "../Components/Sort";
 import PizzaBlock from "../Components/PizzaBlock";
 import SkeletonLoader from "../helpers/loader/SkeletonLoader";
 import context from "../API/Context/Context";
+import { useSelector } from "react-redux";
 const Home = ({ searchValue }) => {
   const [isLoading, setIsLoading] = React.useState(true);
-  const [activeCategory, setActiveCategory] = React.useState(0);
+  // const [activeCategory, setActiveCategory] = React.useState(0);
   const [sortParams, setSortParams] = React.useState("");
   const [sortMethod, setSortMethod] = React.useState("asc");
+
+  const activeCategory = useSelector(state => state.filterReducer.activeCategory)
+  console.log(activeCategory)
+
   const [currentPage, setCurrentPage] = React.useContext(context);
   const [items, setItems] = React.useState([]);
   React.useEffect(() => {
@@ -41,10 +46,7 @@ const Home = ({ searchValue }) => {
     <div className="content">
       <div className="container">
         <div className="content__top">
-          <Categories
-            activeCategory={activeCategory}
-            onClickCategory={(i) => setActiveCategory(i)}
-          />
+          <Categories />
           <Sort
             setSortType={(property) => setSortParams(property)}
             sortMethod={sortMethod}

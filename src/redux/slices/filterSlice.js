@@ -1,13 +1,19 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice } from "@reduxjs/toolkit";
+
+const initialState = {
+    activeCategory: 0,
+    categories: ["Все", "Мясные", "Вегетарианская", "Гриль", "Острые", "Закрытые"]
+}
 
 export const filterSlice = createSlice({
-  name: '',
-  initialState: {
-    value: 0,
-  },
-  reducers: {},
+    name: 'filter',
+    initialState,
+    reducers: {
+        setActiveCategory: ((state, action) => {
+            state.activeCategory = action.payload
+        })
+    }
 })
 
-export const { increment, decrement, incrementByAmount } = filterSlice.actions
-
+export const {setActiveCategory} = filterSlice.actions
 export default filterSlice.reducer

@@ -1,23 +1,35 @@
-import React from "react";
+import React, { useRef, useState } from "react";
 import s from "../Search/search.module.scss";
 import { ReactComponent as SearchIcon } from "../../assets/img/search_icon.svg";
 import { ReactComponent as DeleteIcon } from "../../assets/img/delete_icon.svg";
+import { useDebounce } from "../../helpers/hooks/useDebounce";
 
-const Search = ({ searchValue, setSearchValue }) => {
+const Search = ({ setSearchValue }) => {
+  const [inputValue, setInputValue] = useState("")
+  const inputRef = useRef(null)
+  const searchValueDebounced = useDebounce(inputValue, 250)
+  console.log(searchValueDebounced)
+  function onChangeInput(e) {
+    const { value } = e.target
+    setInputValue(value)
+    setSearchValue(searchValueDebounced)
+  }
+  function onClickClear() {
+    setInputValue("")
+    inputRef.current.focus();
+  }
   return (
     <div className={s.search_wrapper}>
-      {searchValue && (
-        <DeleteIcon
-          onClick={() => setSearchValue("")}
-          className={s.delete_icon}
-        />
+      {inputValue && (
+        <DeleteIcon onClick={onClickClear} className={s.delete_icon} />
       )}
 
       <input
+        ref={inputRef}
         className={s.input}
         type="text"
-        value={searchValue}
-        onChange={(e) => setSearchValue(e.target.value)}
+        value={inputValue}
+        onChange={onChangeInput}
         placeholder="Поиск пиццы"
       />
       <SearchIcon className={s.search_icon} />

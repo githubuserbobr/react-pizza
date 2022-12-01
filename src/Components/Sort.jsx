@@ -1,8 +1,8 @@
 import React from "react";
 import { useSelector, useDispatch } from 'react-redux'
-import { setCategoryId } from "../redux/slices/sortSlice";
+import { setCategoryId, setSortMethod, setSortProperty } from "../redux/slices/sortSlice";
 
-const Sort = ({ setSortType, setSortMethod }) => {
+const Sort = () => {
   const [isVisible, setIsVisible] = React.useState(false);
   const sortList = useSelector(state => state.sortReducer.sortList)
   const categoryId = useSelector(state => state.sortReducer.categoryId)
@@ -34,7 +34,11 @@ const Sort = ({ setSortType, setSortMethod }) => {
             {sortList.map((obj, i) => (
               <li
                 key={i}
-                onClick={() => dispatch(setCategoryId(i))}
+                onClick={() => {
+                  dispatch(setCategoryId(i))
+                  dispatch(setSortMethod(obj))
+                  dispatch(setSortProperty(obj))
+                }}
                 className={
                   obj.name === sortList[categoryId].name ? "active" : null
                 }

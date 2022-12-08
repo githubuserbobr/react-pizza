@@ -15,29 +15,43 @@ const initialState = {
     },
     { name: "алфавиту(по возрастанию)", sortProperty: "title" },
     { name: "алфавиту(по убыванию)", sortProperty: "title", method: "desc" },
-  ]
-}
+  ],
+  currentPage: 1
+};
 
 export const sortSlice = createSlice({
-  name: 'filter',
+  name: "filter",
   initialState,
   reducers: {
-    setCategoryId: ((state, action) => {
-       state.categoryId = action.payload
-    }),
-    setSortMethod: ((state, action) => {
-      if(action.payload.hasOwnProperty("method")) {
-        state.sortMethod = "desc"
+    setCategoryId: (state, action) => {
+      state.categoryId = action.payload;
+    },
+    setSortMethod: (state, action) => {
+      if (action.payload.hasOwnProperty("method")) {
+        state.sortMethod = "desc";
+      } else {
+        state.sortMethod = "asc";
       }
-      else {
-        state.sortMethod = "asc"
+    },
+    setSortProperty: (state, action) => {
+      state.sortProperty = action.payload.sortProperty;
+    },
+    setCurrentPage: (state, action) => {
+      state.currentPage = action.payload
+    },
+    setSort: (state, action) => {
+      state.sortProperty = action.payload.sortProperty;
+      state.categoryId = action.payload.categoryId;
+      state.currentPage = Number(action.payload.currentPage);
+      if (action.payload.hasOwnProperty("method")) {
+        state.sortMethod = "desc";
+      } else {
+        state.sortMethod = "asc";
       }
-    }),
-    setSortProperty: ((state, action) => {
-      state.sortProperty = action.payload.sortProperty
-    })
-  }
-})
+    },
+  },
+});
 
-export const { setCategoryId, setSortMethod, setSortProperty } = sortSlice.actions
-export default sortSlice.reducer
+export const { setCurrentPage,setCategoryId, setSortMethod, setSortProperty, setSort } =
+  sortSlice.actions;
+export default sortSlice.reducer;

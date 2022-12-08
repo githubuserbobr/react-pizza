@@ -1,15 +1,32 @@
 import React from "react";
-import { useSelector, useDispatch } from 'react-redux'
-import { setCategoryId, setSortMethod, setSortProperty } from "../redux/slices/sortSlice";
+import { useEffect } from "react";
+import { useRef } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import {
+  setCategoryId,
+  setSortMethod,
+  setSortProperty,
+} from "../redux/slices/sortSlice";
 
 const Sort = () => {
   const [isVisible, setIsVisible] = React.useState(false);
-  const sortList = useSelector(state => state.sortReducer.sortList)
-  const categoryId = useSelector(state => state.sortReducer.categoryId)
+  const sortList = useSelector((state) => state.sortReducer.sortList);
+  const categoryId = useSelector((state) => state.sortReducer.categoryId);
   const dispatch = useDispatch();
+  const sortRef = useRef();
+  useEffect(() => {
+    function handleClickBody(event) {
+        if (!event.path.includes(sortRef.current)) {
+          setIsVisible(false);
+          console.log("outside");
+        }
+      }
+      document.body.addEventListener('click', handleClickBody)
+    return () => document.body.removeEventListener("click", handleClickBody);
+  }, []);
 
   return (
-    <div className="sort">
+    <div ref={sortRef} className="sort">
       <div className="sort__label">
         <svg
           width="10"
@@ -35,9 +52,9 @@ const Sort = () => {
               <li
                 key={i}
                 onClick={() => {
-                  dispatch(setCategoryId(i))
-                  dispatch(setSortMethod(obj))
-                  dispatch(setSortProperty(obj))
+                  dispatch(setCategoryId(i));
+                  dispatch(setSortMethod(obj));
+                  dispatch(setSortProperty(obj));
                 }}
                 className={
                   obj.name === sortList[categoryId].name ? "active" : null

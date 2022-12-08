@@ -11,9 +11,12 @@ export const filterSlice = createSlice({
     reducers: {
         setActiveCategory: ((state, action) => {
             state.activeCategory = action.payload
+        }),
+        setFilters: ((state, action) => {
+            state.activeCategory = Number(action.payload.activeCategory)
         })
     }
 })
 
-export const {setActiveCategory} = filterSlice.actions
+export const {setActiveCategory, setFilters} = filterSlice.actions
 export default filterSlice.reducer

@@ -5,17 +5,18 @@ import { ReactComponent as DeleteIcon } from "../../assets/img/delete_icon.svg";
 import { useDebounce } from "../../helpers/hooks/useDebounce";
 
 const Search = ({ setSearchValue }) => {
-  const [inputValue, setInputValue] = useState("")
-  const inputRef = useRef(null)
-  const searchValueDebounced = useDebounce(inputValue, 250)
-  console.log(searchValueDebounced)
+  const [inputValue, setInputValue] = useState("");
+  const inputRef = useRef(null);
+  const searchValueDebounced = useDebounce(inputValue, 250);
+
   function onChangeInput(e) {
-    const { value } = e.target
-    setInputValue(value)
-    setSearchValue(searchValueDebounced)
+    const { value } = e.target;
+    setInputValue(value);
+    setSearchValue(searchValueDebounced);
   }
   function onClickClear() {
-    setInputValue("")
+    setInputValue("");
+    setSearchValue("");
     inputRef.current.focus();
   }
   return (
